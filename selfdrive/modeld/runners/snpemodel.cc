@@ -77,6 +77,7 @@ SNPEModel::SNPEModel(const std::string path, float *_output, size_t _output_size
   output_map.add(output_tensor_name, output_buffer.get());
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SNPEModel::addInput(const std::string name, float *buffer, int size) {
   const int idx = inputs.size();
   const auto &input_tensor_names_opt = snpe->getInputTensorNames();
@@ -109,6 +110,7 @@ void SNPEModel::addInput(const std::string name, float *buffer, int size) {
   inputs.push_back(std::unique_ptr<SNPEModelInput>(new SNPEModelInput(name, buffer, size, std::move(input_buffer))));
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SNPEModel::execute() {
   if (!snpe->execute(input_map, output_map)) {
     PrintErrorStringAndExit();

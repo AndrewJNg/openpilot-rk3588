@@ -10,9 +10,14 @@ class ModelRunner(RunModel):
   THNEED = 'THNEED'
   SNPE = 'SNPE'
   ONNX = 'ONNX'
+  RKNN = 'RKNN'
 
   def __new__(cls, paths, *args, **kwargs):
-    if ModelRunner.THNEED in paths and USE_THNEED:
+    
+    if ModelRunner.RKNN in paths:
+      from openpilot.selfdrive.modeld.runners.rknnmodel import RKNNModel as Runner
+      runner_type = ModelRunner.RKNN
+    elif ModelRunner.THNEED in paths and USE_THNEED:
       from openpilot.selfdrive.modeld.runners.thneedmodel_pyx import ThneedModel as Runner
       runner_type = ModelRunner.THNEED
     elif ModelRunner.SNPE in paths and USE_SNPE:
